@@ -1,0 +1,48 @@
+# Python Virtual Environment
+venv/
+.venv/
+env/
+ENV/
+
+# Python Cache & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.mypy_cache/
+
+# Large Datasets (Over GitHub's 100MB limit & multi-gigabyte files)
+dataset/
+
+# Submission TSV Files (Keep directory tracked with .gitkeep)
+output/*.tsv
+!output/.gitkeep
+
+# Model Checkpoints, Weights & Serialized Artefacts
+*.pkl
+*.joblib
+*.pt
+*.pth
+*.bin
+*.onnx
+models/
+checkpoints/
+
+# Submission archives
+*.zip
+
+# Operating System & IDE Files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs & Temporary Scratch Files
+*.log
+scratch/
+temp/
+tmp/
