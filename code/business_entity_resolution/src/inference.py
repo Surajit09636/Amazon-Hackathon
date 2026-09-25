@@ -1,17 +1,4 @@
-"""
-High-Recall, Ultra-Low Memory Test Inference Pipeline.
 
-Guaranteed Operating Parameters:
-1. Strict Peak RAM < 850 MB (Zero pagefile swapping, zero C: drive disk thrashing).
-2. Zero Rust/C++ installation needed (pure pre-compiled Python binaries).
-3. Two-Pass Target Indexing (S2 then S3) to keep in-memory targets capped under 2.4M records.
-4. Multi-Key Inverted Index with AVX2 RapidFuzz candidate pre-ranking (91.9%+ validation F0.5).
-5. Fast multi-threaded CPU XGBoost batch scoring (31ms per 25k pairs, in-place, zero GPU memory bloat).
-6. Clean streaming disk writes directly to output/candidate_pairs.tsv and output/matching_results.tsv.
-
-Usage:
-    python inference.py
-"""
 
 from collections import defaultdict
 import gc
@@ -133,9 +120,7 @@ def stream_targets_and_index(file_path: Path, target_country: str) -> tuple[list
 
 def run_lean_inference():
     start_total = time.time()
-    print("=" * 68, flush=True)
     print("LEAN & FAST TEST INFERENCE PIPELINE (Strict RAM < 850 MB)", flush=True)
-    print("=" * 68, flush=True)
 
     # 1. Load Trained XGBoost Model & Optimal Decision Threshold
     model_file = MODELS_DIR / "xgboost_er_model.json"
@@ -173,9 +158,7 @@ def run_lean_inference():
 
     for country in countries:
         country_start = time.time()
-        print("\n" + "=" * 68, flush=True)
         print(f"PROCESSING COUNTRY: {country.upper()}", flush=True)
-        print("=" * 68, flush=True)
 
         # 1. Load S1 queries for this country
         t0 = time.time()
@@ -291,11 +274,9 @@ def run_lean_inference():
         gc.collect()
 
     total_time = time.time() - start_total
-    print("\n" + "=" * 68, flush=True)
     print(f"ALL TEST INFERENCE COMPLETED IN {total_time / 60:.2f} MINUTES!", flush=True)
     print(f"  Candidate Pairs:  {cand_out_path}", flush=True)
     print(f"  Matching Results: {match_out_path}", flush=True)
-    print("=" * 68, flush=True)
 
 
 if __name__ == "__main__":

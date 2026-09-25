@@ -1,10 +1,4 @@
-"""
-High-Recall Dual-Pass Candidate Generation (Blocking) Engine.
-Combines Name-based Blocking + Address-based Blocking to capture cross-script
-and DBA matches.
 
-
-"""
 
 from collections import defaultdict
 import os
